@@ -1,0 +1,1 @@
+This is the previous exam of SoftUni Javascript Applications. It is a simple SPA application. The cthe licence for the html and css belongs to SoftUni.Copyrighted.
