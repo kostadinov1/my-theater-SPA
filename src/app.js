@@ -1,4 +1,3 @@
-// here are is the routing
 import { logout } from "./api/api.js";
 import { page, render } from "./lib.js"
 import { getUserData } from "./util.js"
@@ -7,10 +6,11 @@ import { detailsPage } from "./views/details.js";
 import { homePage } from "./views/home.js";
 import { loginPage } from "./views/login.js";
 import { registerPage } from "./views/register.js";
-import * as data from './api/data.js' 
-import { editPage } from "./views/edit.js";
-import { deletePage } from "./views/delete.js";
 import { profilePage } from "./views/profile.js";
+import { editPage } from "./views/edit.js";
+
+// made just for testing requests in the browser
+import * as data from './api/data.js' 
 window.actionsData = data
 
 
@@ -25,7 +25,6 @@ page('/register', registerPage)
 page('/create', createPage)
 page('/details/:id', detailsPage)
 page('/edit/:id', editPage)
-page('/delete/:id', deletePage )
 page('/profile', profilePage)
 
 updateUserNav()

@@ -1,12 +1,10 @@
-import { getEventDetails } from "../api/data.js";
+import { deleteEvent, getEventDetails } from "../api/data.js";
 import { html } from "../lib.js";
 import { getUserData } from "../util.js";
 
 
 
-const detailsTemplate = (event, isOwner) => html`
-
-        <!--Details Page-->
+const detailsTemplate = (event, isOwner, onDelete) => html`
         <section id="detailsPage">
             <div id="detailsBox">
                 <div class="detailsInfo">
@@ -23,7 +21,7 @@ const detailsTemplate = (event, isOwner) => html`
                     <h4>Author: ${event.author}</h4>
                     <div class="buttons">
                         ${isOwner ? html` 
-                        <a class="btn-delete" href="/delete/${event._id}">Delete</a>
+                        <a @click=${onDelete} class="btn-delete" href="javascript:void(0)">Delete</a>
                         <a class="btn-edit" href="/edit/${event._id}">Edit</a>`: html`
                         <a class="btn-like" href="#">Like</a>`}
                     </div>
@@ -39,5 +37,17 @@ export async function detailsPage(context) {
     const isOwner = userData && userData.id == event._ownerId
 
 
-    context.render(detailsTemplate(event, isOwner))
+    context.render(detailsTemplate(event, isOwner, onDelete))
+
+
+    async function onDelete() {        
+
+        const choice = confirm('Are you sure you want to delete?')
+
+        if (choice) {
+            await deleteEvent(context.params.id)
+            context.page.redirect('/')
+        }
+    }
 }
+
